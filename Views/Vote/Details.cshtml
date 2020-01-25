@@ -1,0 +1,51 @@
+﻿@model OnlineVoting.tbl_vote
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_vote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VoteDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VoteDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_candidate.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_candidate.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_events.EventTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_events.EventTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_voter.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_voter.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

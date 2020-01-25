@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineVotingSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_candidate">
+    <Key>
+      <PropertyRef Name="CandidateID" />
+    </Key>
+    <Property Name="CandidateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="GenderID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_events" Relationship="Self.FK_tbl_candidate_tbl_events" FromRole="tbl_candidate" ToRole="tbl_events" />
+    <NavigationProperty Name="tbl_gender" Relationship="Self.FK_tbl_candidate_tbl_gender" FromRole="tbl_candidate" ToRole="tbl_gender" />
+    <NavigationProperty Name="tbl_vote" Relationship="Self.FK_tbl_vote_tbl_candidate" FromRole="tbl_candidate" ToRole="tbl_vote" />
+  </EntityType>
+  <EntityType Name="tbl_events">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EventDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="tbl_candidate" Relationship="Self.FK_tbl_candidate_tbl_events" FromRole="tbl_events" ToRole="tbl_candidate" />
+    <NavigationProperty Name="tbl_vote" Relationship="Self.FK_tbl_vote_tbl_events" FromRole="tbl_events" ToRole="tbl_vote" />
+    <NavigationProperty Name="tbl_voter" Relationship="Self.FK_tbl_voter_tbl_events" FromRole="tbl_events" ToRole="tbl_voter" />
+  </EntityType>
+  <EntityType Name="tbl_gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_candidate" Relationship="Self.FK_tbl_candidate_tbl_gender" FromRole="tbl_gender" ToRole="tbl_candidate" />
+    <NavigationProperty Name="tbl_voter" Relationship="Self.FK_tbl_voter_tbl_gender" FromRole="tbl_gender" ToRole="tbl_voter" />
+  </EntityType>
+  <EntityType Name="tbl_vote">
+    <Key>
+      <PropertyRef Name="VoteID" />
+    </Key>
+    <Property Name="VoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="CandidateID" Type="Int32" Nullable="false" />
+    <Property Name="VoterID" Type="Int32" Nullable="false" />
+    <Property Name="VoteDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tbl_candidate" Relationship="Self.FK_tbl_vote_tbl_candidate" FromRole="tbl_vote" ToRole="tbl_candidate" />
+    <NavigationProperty Name="tbl_events" Relationship="Self.FK_tbl_vote_tbl_events" FromRole="tbl_vote" ToRole="tbl_events" />
+    <NavigationProperty Name="tbl_voter" Relationship="Self.FK_tbl_vote_tbl_voter" FromRole="tbl_vote" ToRole="tbl_voter" />
+  </EntityType>
+  <EntityType Name="tbl_voter">
+    <Key>
+      <PropertyRef Name="VoterID" />
+    </Key>
+    <Property Name="VoterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="GenderID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_events" Relationship="Self.FK_tbl_voter_tbl_events" FromRole="tbl_voter" ToRole="tbl_events" />
+    <NavigationProperty Name="tbl_gender" Relationship="Self.FK_tbl_voter_tbl_gender" FromRole="tbl_voter" ToRole="tbl_gender" />
+    <NavigationProperty Name="tbl_vote" Relationship="Self.FK_tbl_vote_tbl_voter" FromRole="tbl_voter" ToRole="tbl_vote" />
+  </EntityType>
+  <Association Name="FK_tbl_candidate_tbl_events">
+    <End Role="tbl_events" Type="Self.tbl_events" Multiplicity="1" />
+    <End Role="tbl_candidate" Type="Self.tbl_candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="tbl_candidate">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_candidate_tbl_gender">
+    <End Role="tbl_gender" Type="Self.tbl_gender" Multiplicity="1" />
+    <End Role="tbl_candidate" Type="Self.tbl_candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="tbl_candidate">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_vote_tbl_candidate">
+    <End Role="tbl_candidate" Type="Self.tbl_candidate" Multiplicity="1" />
+    <End Role="tbl_vote" Type="Self.tbl_vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_candidate">
+        <PropertyRef Name="CandidateID" />
+      </Principal>
+      <Dependent Role="tbl_vote">
+        <PropertyRef Name="CandidateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_vote_tbl_events">
+    <End Role="tbl_events" Type="Self.tbl_events" Multiplicity="1" />
+    <End Role="tbl_vote" Type="Self.tbl_vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="tbl_vote">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_voter_tbl_events">
+    <End Role="tbl_events" Type="Self.tbl_events" Multiplicity="1" />
+    <End Role="tbl_voter" Type="Self.tbl_voter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="tbl_voter">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_voter_tbl_gender">
+    <End Role="tbl_gender" Type="Self.tbl_gender" Multiplicity="1" />
+    <End Role="tbl_voter" Type="Self.tbl_voter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="tbl_voter">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_vote_tbl_voter">
+    <End Role="tbl_voter" Type="Self.tbl_voter" Multiplicity="1" />
+    <End Role="tbl_vote" Type="Self.tbl_vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_voter">
+        <PropertyRef Name="VoterID" />
+      </Principal>
+      <Dependent Role="tbl_vote">
+        <PropertyRef Name="VoterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnlineVotingSystemDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_candidate" EntityType="Self.tbl_candidate" />
+    <EntitySet Name="tbl_events" EntityType="Self.tbl_events" />
+    <EntitySet Name="tbl_gender" EntityType="Self.tbl_gender" />
+    <EntitySet Name="tbl_vote" EntityType="Self.tbl_vote" />
+    <EntitySet Name="tbl_voter" EntityType="Self.tbl_voter" />
+    <AssociationSet Name="FK_tbl_candidate_tbl_events" Association="Self.FK_tbl_candidate_tbl_events">
+      <End Role="tbl_events" EntitySet="tbl_events" />
+      <End Role="tbl_candidate" EntitySet="tbl_candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_candidate_tbl_gender" Association="Self.FK_tbl_candidate_tbl_gender">
+      <End Role="tbl_gender" EntitySet="tbl_gender" />
+      <End Role="tbl_candidate" EntitySet="tbl_candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_vote_tbl_candidate" Association="Self.FK_tbl_vote_tbl_candidate">
+      <End Role="tbl_candidate" EntitySet="tbl_candidate" />
+      <End Role="tbl_vote" EntitySet="tbl_vote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_vote_tbl_events" Association="Self.FK_tbl_vote_tbl_events">
+      <End Role="tbl_events" EntitySet="tbl_events" />
+      <End Role="tbl_vote" EntitySet="tbl_vote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_voter_tbl_events" Association="Self.FK_tbl_voter_tbl_events">
+      <End Role="tbl_events" EntitySet="tbl_events" />
+      <End Role="tbl_voter" EntitySet="tbl_voter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_voter_tbl_gender" Association="Self.FK_tbl_voter_tbl_gender">
+      <End Role="tbl_gender" EntitySet="tbl_gender" />
+      <End Role="tbl_voter" EntitySet="tbl_voter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_vote_tbl_voter" Association="Self.FK_tbl_vote_tbl_voter">
+      <End Role="tbl_voter" EntitySet="tbl_voter" />
+      <End Role="tbl_vote" EntitySet="tbl_vote" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

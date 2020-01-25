@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnlineVotingSystemDBModelStoreContainer" CdmEntityContainer="OnlineVotingSystemDBEntities">
+    <EntitySetMapping Name="tbl_candidate">
+      <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.tbl_candidate">
+        <MappingFragment StoreEntitySet="tbl_candidate">
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_events">
+      <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.tbl_events">
+        <MappingFragment StoreEntitySet="tbl_events">
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
+          <ScalarProperty Name="EventDesc" ColumnName="EventDesc" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_gender">
+      <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.tbl_gender">
+        <MappingFragment StoreEntitySet="tbl_gender">
+          <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_vote">
+      <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.tbl_vote">
+        <MappingFragment StoreEntitySet="tbl_vote">
+          <ScalarProperty Name="VoteID" ColumnName="VoteID" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="VoterID" ColumnName="VoterID" />
+          <ScalarProperty Name="VoteDateTime" ColumnName="VoteDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_voter">
+      <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.tbl_voter">
+        <MappingFragment StoreEntitySet="tbl_voter">
+          <ScalarProperty Name="VoterID" ColumnName="VoterID" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

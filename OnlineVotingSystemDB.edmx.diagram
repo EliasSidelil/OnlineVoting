@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="078d0e48c9614c7cb4a441eea51b8b94" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.tbl_candidate" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.tbl_events" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.tbl_gender" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.tbl_vote" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.tbl_voter" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_candidate_tbl_events" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_candidate_tbl_gender" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_vote_tbl_candidate" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_vote_tbl_events" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_voter_tbl_events" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_voter_tbl_gender" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_tbl_vote_tbl_voter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
